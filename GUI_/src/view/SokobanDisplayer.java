@@ -26,6 +26,8 @@ public class SokobanDisplayer extends Canvas {
 	private StringProperty boxtargetfilename;
 	
 	private int count =0;
+	private int num_of_targets;
+	private int num_box_on_targets;
 	
 	private HashMap<String, Image> objtoim;
 	
@@ -51,8 +53,6 @@ public class SokobanDisplayer extends Canvas {
 
 		this.levelim = null;
 		gc = getGraphicsContext2D();
-		
-		
 		
 
 		
@@ -112,6 +112,13 @@ public class SokobanDisplayer extends Canvas {
 				{
 					if(levelim.get(i).get(j)!= null)
 					{
+						if(this.getNum_box_on_targets()==this.getNum_of_targets())
+						{
+							
+							
+							
+						}
+						
 						if(levelim.get(i).get(j) instanceof Transperent && count_trans ==0)
 						{
 							gc.setFill(Color.ALICEBLUE);
@@ -165,6 +172,7 @@ public class SokobanDisplayer extends Canvas {
 			this.initimage();
 		}
 		this.redraw();
+		
 	}
 
 
@@ -233,6 +241,18 @@ public class SokobanDisplayer extends Canvas {
 	
 	public void setBoxtargetfilename(String boxtargetfilename) {
 		this.boxtargetfilename.set(boxtargetfilename);
+	}
+	public int getNum_of_targets() {
+		return num_of_targets;
+	}
+	public void setNum_of_targets(int num_of_targets) {
+		this.num_of_targets = num_of_targets;
+	}
+	public int getNum_box_on_targets() {
+		return num_box_on_targets;
+	}
+	public void setNum_box_on_targets(int num_box_on_targets) {
+		this.num_box_on_targets = num_box_on_targets;
 	}
 
 }

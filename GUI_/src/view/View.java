@@ -1,5 +1,6 @@
 package view;
 
+
 import model.data.Level;
 
 public interface View {

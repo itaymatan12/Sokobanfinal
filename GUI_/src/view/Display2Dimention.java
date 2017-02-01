@@ -35,15 +35,15 @@ public class Display2Dimention implements Display {
 				temp2=temp1.get(i);
 				for (; j < temp2.size(); j++) {
 					
-					class_name = temp2.get(j).getClass().getSimpleName();;
-					txt.concat(l_display.get(class_name));		
+					class_name = temp2.get(j).getClass().getSimpleName();
+					txt=txt + l_display.get(class_name);
+						
 				}
-				txt.concat("\n");
+				txt= txt + "\n";
 				j=0;
 			}	
 		
 			
 			return txt;
 	}
-
 }

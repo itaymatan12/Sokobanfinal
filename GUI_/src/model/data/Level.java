@@ -13,18 +13,21 @@ public class Level  implements Serializable{
 	
 	//data members
 	private ArrayList<ArrayList<GameObject>> levelim ;//ArrayList of ArrayList of GameObject that describes the level and give us like an image of the level
-	private int time;
+	private int num_of_targets;
+	private int num_box_on_targets;
 	private ArrayList<Box> boxes;//ArrayList that contains all the boxes in the level 
 	private ArrayList<Figure> figures;//ArrayList that contains all the figures in the level 
 	private ArrayList<Wall> walls;//ArrayList that contains all the walls in the level 
 	private ArrayList<DestofBox> destinations;//ArrayList that contains all the destinations in the level 
 	private ArrayList<Transperent> transperents;//ArrayList that contains all the transperents in the level 
 	private HashMap<String,DestofBox> targets;//hash map that get a string that represent a coordinate and tell us if in this coordinate ther is a destination object
-	
+	private int steps;
 	
 	//default constructor
-	public Level() {
-				
+	public Level() 
+	{
+		this.num_of_targets=0;
+		this.num_box_on_targets=0;
 		levelim=new ArrayList<ArrayList<GameObject>>();
 		boxes=new ArrayList<Box>();
 		figures=new ArrayList<Figure>();
@@ -33,6 +36,8 @@ public class Level  implements Serializable{
 		transperents=new ArrayList<Transperent>();
 		//HASH MAP that mapping strings to DestofBox objects		
 		targets = new HashMap<String,DestofBox>();		
+		
+		this.steps= 0;
 	}
 	
 	//removes function that clears the array lists and hashmap and allocated them again
@@ -92,13 +97,6 @@ public class Level  implements Serializable{
 		this.levelim = levelim;
 	}
 
-	public int getTime() {
-		return time;
-	}
-
-	public void setTime(int time) {
-		this.time = time;
-	}
 
 	public ArrayList<Box> getBoxes() {
 		return boxes;
@@ -146,5 +144,29 @@ public class Level  implements Serializable{
 
 	public void setTargets(HashMap<String, DestofBox> targets) {
 		this.targets = targets;
+	}
+
+	public int getSteps() {
+		return steps;
+	}
+
+	public void setSteps(int steps) {
+		this.steps = steps;
+	}
+
+	public int getNum_of_targets() {
+		return num_of_targets;
+	}
+
+	public void setNum_of_targets(int num_of_targets) {
+		this.num_of_targets = num_of_targets;
+	}
+
+	public int getNum_box_on_targets() {
+		return num_box_on_targets;
+	}
+
+	public void setNum_box_on_targets(int num_box_on_targets) {
+		this.num_box_on_targets = num_box_on_targets;
 	}
 }

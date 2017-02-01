@@ -12,9 +12,12 @@ import model.data.Wall;
 //class that define policy to character that  able to move just 1 step and able to push just 1 box
 public class RegularMySokobanPolicy extends MySokobanPolicyDecleration {
 	
+
+	
 	//default constructor
 	public RegularMySokobanPolicy() {
-		// TODO Auto-generated constructor stub
+		
+
 	}
 
 	//function that check if the character can move up
@@ -25,6 +28,8 @@ public class RegularMySokobanPolicy extends MySokobanPolicyDecleration {
 		int x=0,y=0;
 		x=lvl.getFigures().get(0).getX();
 		y=lvl.getFigures().get(0).getY();
+		
+		
 	
 		
 		if(lvl.getLevelim().get(y-1).get(x) instanceof Wall)
@@ -54,6 +59,8 @@ public class RegularMySokobanPolicy extends MySokobanPolicyDecleration {
 		int x=0,y=0;
 		x=lvl.getFigures().get(0).getX();
 		y=lvl.getFigures().get(0).getY();
+		
+		
 	
 		if(lvl.getLevelim().get(y).get(x+1) instanceof Wall)
 		{
@@ -81,6 +88,8 @@ public class RegularMySokobanPolicy extends MySokobanPolicyDecleration {
 		x=lvl.getFigures().get(0).getX();
 		y=lvl.getFigures().get(0).getY();
 		
+		
+		
 		if(lvl.getLevelim().get(y).get(x-1) instanceof Wall)
 		{
 			return false;	
@@ -107,6 +116,8 @@ public class RegularMySokobanPolicy extends MySokobanPolicyDecleration {
 		x=lvl.getFigures().get(0).getX();
 		y=lvl.getFigures().get(0).getY();
 		
+		
+		
 		if(lvl.getLevelim().get(y+1).get(x) instanceof Wall)
 		{
 			return false;	
@@ -129,6 +140,29 @@ public class RegularMySokobanPolicy extends MySokobanPolicyDecleration {
 	@Override
 	public void move_right(Level lvl) 
 	{
+		/*
+		int v=0;
+		int t=0;
+		int count =0;
+
+			for (String key : lvl.getTargets().keySet())
+			{
+			    v= (int)key.charAt(0);
+			    t= (int)key.charAt(2);
+			      
+			    if(lvl.getLevelim().get(t).get(v) instanceof Box)
+			    {
+			    	count++;
+			    }
+			}
+			
+		
+			if(lvl.getTargets().size()==count)
+			{
+				lvl.setNum_box_on_targets(count);
+			}
+			*/
+				
 		Utilities u = new Utilities();	
 		int x=0,y=0;	
 		x=lvl.getFigures().get(0).getX();
@@ -144,6 +178,8 @@ public class RegularMySokobanPolicy extends MySokobanPolicyDecleration {
 				
 				((Box)(lvl.getLevelim().get(y).get(x+2))).setFlag(1);
 				
+				lvl.setSteps(lvl.getSteps()+1);
+				
 				if(lvl.getTargets().get(u.conv_cord_tostring(x, y)) instanceof DestofBox)
 				{
 					lvl.getLevelim().get(y).set(x, new RegularDestofBox()); 	
@@ -158,6 +194,8 @@ public class RegularMySokobanPolicy extends MySokobanPolicyDecleration {
 				
 				((Box)(lvl.getLevelim().get(y).get(x+2))).setFlag(0);
 				
+				lvl.setSteps(lvl.getSteps()+1);
+				
 				if(lvl.getTargets().get(u.conv_cord_tostring(x, y)) instanceof DestofBox)
 				{
 					lvl.getLevelim().get(y).set(x, new RegularDestofBox()); 	
@@ -167,6 +205,7 @@ public class RegularMySokobanPolicy extends MySokobanPolicyDecleration {
 			else if(lvl.getLevelim().get(y).get(x+1) instanceof Transperent)
 			{
 				this.switchobj(lvl, x, y, x+1, y);		
+				lvl.setSteps(lvl.getSteps()+1);
 				
 				if(lvl.getTargets().get(u.conv_cord_tostring(x, y)) instanceof DestofBox)
 				{
@@ -178,6 +217,7 @@ public class RegularMySokobanPolicy extends MySokobanPolicyDecleration {
 			{
 				lvl.getLevelim().get(y).set(x+1, new RegularTransperent());
 				this.switchobj(lvl, x, y, x+1, y);
+				lvl.setSteps(lvl.getSteps()+1);
 				
 				if(lvl.getTargets().get(u.conv_cord_tostring(x, y)) instanceof DestofBox)
 				{
@@ -191,6 +231,28 @@ public class RegularMySokobanPolicy extends MySokobanPolicyDecleration {
 	@Override
 	public void move_left(Level lvl)
 	{
+		/*
+		int v=0;
+		int t=0;
+		int count =0;
+
+			for (String key : lvl.getTargets().keySet())
+			{
+			    v= (int)key.charAt(0);
+			    t= (int)key.charAt(2);
+			      
+			    if(lvl.getLevelim().get(t).get(v) instanceof Box)
+			    {
+			    	count++;
+			    }
+			}
+			
+		
+			if(lvl.getTargets().size()==count)
+			{
+				lvl.setNum_box_on_targets(count);
+			}
+		*/
 		
 		Utilities u = new Utilities();	
 		int x=0,y=0;	
@@ -207,6 +269,8 @@ public class RegularMySokobanPolicy extends MySokobanPolicyDecleration {
 				
 				((Box)(lvl.getLevelim().get(y).get(x-2))).setFlag(1);
 				
+				lvl.setSteps(lvl.getSteps()+1);
+				
 				if(lvl.getTargets().get(u.conv_cord_tostring(x, y)) instanceof DestofBox)
 				{
 					lvl.getLevelim().get(y).set(x, new RegularDestofBox()); 	
@@ -218,8 +282,10 @@ public class RegularMySokobanPolicy extends MySokobanPolicyDecleration {
 			{
 				this.switchobj(lvl, x-1, y, x-2, y);
 				this.switchobj(lvl, x, y, x-1, y);
+				lvl.setSteps(lvl.getSteps()+1);
 				
 				((Box)(lvl.getLevelim().get(y).get(x-2))).setFlag(0);
+				
 				
 				if(lvl.getTargets().get(u.conv_cord_tostring(x, y)) instanceof DestofBox)
 				{
@@ -231,6 +297,9 @@ public class RegularMySokobanPolicy extends MySokobanPolicyDecleration {
 			else if(lvl.getLevelim().get(y).get(x-1) instanceof Transperent)
 			{
 				this.switchobj(lvl, x, y, x-1, y);	
+				
+				lvl.setSteps(lvl.getSteps()+1);
+				
 				if(lvl.getTargets().get(u.conv_cord_tostring(x, y)) instanceof DestofBox)
 				{
 					lvl.getLevelim().get(y).set(x, new RegularDestofBox()); 	
@@ -241,6 +310,8 @@ public class RegularMySokobanPolicy extends MySokobanPolicyDecleration {
 			{
 				lvl.getLevelim().get(y).set(x-1, new RegularTransperent());
 				this.switchobj(lvl, x, y, x-1, y);
+				
+				lvl.setSteps(lvl.getSteps()+1);
 				
 				if(lvl.getTargets().get(u.conv_cord_tostring(x, y)) instanceof DestofBox)
 				{
@@ -257,6 +328,29 @@ public class RegularMySokobanPolicy extends MySokobanPolicyDecleration {
 	@Override
 	public void move_up(Level lvl)
 	{
+		/*
+		int v=0;
+		int t=0;
+		int count =0;
+
+			for (String key : lvl.getTargets().keySet())
+			{
+			    v= (int)key.charAt(0);
+			    t= (int)key.charAt(2);
+			      
+			    if(lvl.getLevelim().get(t).get(v) instanceof Box)
+			    {
+			    	count++;
+			    }
+			}
+			
+		
+			if(lvl.getTargets().size()==count)
+			{
+				lvl.setNum_box_on_targets(count);
+			}
+			*/
+		
 		Utilities u = new Utilities();	
 		int x=0,y=0;	
 		x=lvl.getFigures().get(0).getX();
@@ -272,6 +366,8 @@ public class RegularMySokobanPolicy extends MySokobanPolicyDecleration {
 				
 				((Box)(lvl.getLevelim().get(y-2).get(x))).setFlag(1);
 				
+				lvl.setSteps(lvl.getSteps()+1);
+				
 				if(lvl.getTargets().get(u.conv_cord_tostring(x, y)) instanceof DestofBox)
 				{
 					lvl.getLevelim().get(y).set(x, new RegularDestofBox()); 	
@@ -286,6 +382,8 @@ public class RegularMySokobanPolicy extends MySokobanPolicyDecleration {
 				
 				((Box)(lvl.getLevelim().get(y-2).get(x))).setFlag(0);
 				
+				lvl.setSteps(lvl.getSteps()+1);
+				
 				if(lvl.getTargets().get(u.conv_cord_tostring(x, y)) instanceof DestofBox)
 				{
 					lvl.getLevelim().get(y).set(x, new RegularDestofBox()); 	
@@ -296,6 +394,7 @@ public class RegularMySokobanPolicy extends MySokobanPolicyDecleration {
 			else if(lvl.getLevelim().get(y-1).get(x) instanceof Transperent)
 			{
 				this.switchobj(lvl, x, y, x, y-1);
+				lvl.setSteps(lvl.getSteps()+1);
 				
 				if(lvl.getTargets().get(u.conv_cord_tostring(x, y)) instanceof DestofBox)
 				{
@@ -307,6 +406,7 @@ public class RegularMySokobanPolicy extends MySokobanPolicyDecleration {
 			{
 				lvl.getLevelim().get(y-1).set(x, new RegularTransperent());
 				this.switchobj(lvl, x, y, x, y-1);
+				lvl.setSteps(lvl.getSteps()+1);
 				
 				if(lvl.getTargets().get(u.conv_cord_tostring(x, y)) instanceof DestofBox)
 				{
@@ -323,6 +423,29 @@ public class RegularMySokobanPolicy extends MySokobanPolicyDecleration {
 	@Override
 	public void move_down(Level lvl)
 	{
+		/*
+		int v=0;
+		int t=0;
+		int count =0;
+
+			for (String key : lvl.getTargets().keySet())
+			{
+			    v= (int)key.charAt(0);
+			    t= (int)key.charAt(2);
+			      
+			    if(lvl.getLevelim().get(t).get(v) instanceof Box)
+			    {
+			    	count++;
+			    }
+			}
+			
+		
+			if(lvl.getTargets().size()==count)
+			{
+				lvl.setNum_box_on_targets(count);
+			}
+			*/
+		
 		Utilities u = new Utilities();	
 		int x=0,y=0;	
 		x=lvl.getFigures().get(0).getX();
@@ -337,6 +460,8 @@ public class RegularMySokobanPolicy extends MySokobanPolicyDecleration {
 				this.switchobj(lvl, x, y, x, y+1);
 				
 				((Box)(lvl.getLevelim().get(y+2).get(x))).setFlag(1);
+				
+				lvl.setSteps(lvl.getSteps()+1);
 				
 				if(lvl.getTargets().get(u.conv_cord_tostring(x, y)) instanceof DestofBox)
 				{
@@ -353,6 +478,8 @@ public class RegularMySokobanPolicy extends MySokobanPolicyDecleration {
 				
 				((Box)(lvl.getLevelim().get(y+2).get(x))).setFlag(0);
 				
+				lvl.setSteps(lvl.getSteps()+1);
+				
 				if(lvl.getTargets().get(u.conv_cord_tostring(x, y)) instanceof DestofBox)
 				{
 					lvl.getLevelim().get(y).set(x, new RegularDestofBox()); 	
@@ -363,7 +490,8 @@ public class RegularMySokobanPolicy extends MySokobanPolicyDecleration {
 			else if(lvl.getLevelim().get(y+1).get(x) instanceof Transperent)
 			{
 				
-				this.switchobj(lvl, x, y, x, y+1);		
+				this.switchobj(lvl, x, y, x, y+1);	
+				lvl.setSteps(lvl.getSteps()+1);
 				
 				if(lvl.getTargets().get(u.conv_cord_tostring(x, y)) instanceof DestofBox)
 				{
@@ -375,6 +503,7 @@ public class RegularMySokobanPolicy extends MySokobanPolicyDecleration {
 			{
 				lvl.getLevelim().get(y+1).set(x, new RegularTransperent());
 				this.switchobj(lvl, x, y, x, y+1);
+				lvl.setSteps(lvl.getSteps()+1);
 				
 				if(lvl.getTargets().get(u.conv_cord_tostring(x, y)) instanceof DestofBox)
 				{

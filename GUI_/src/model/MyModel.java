@@ -17,12 +17,14 @@ public class MyModel extends Observable implements Model {
 	
 	//data members
 	private Level lvl;
+	private int count;
 	private HashMap<String, Exit>exit;//hash map that mapping string that represent a exit type object to the appropriate exit object 
 	private MySokobanPolicyDecleration policy;
 	
 	//default constructor
 	public MyModel()
 	{
+		count=0;
 		exit = new HashMap<String, Exit>();
 		this.lvl =new Level();	
 		this.exit.put("regularexit", new RegularExit());
@@ -42,12 +44,19 @@ public class MyModel extends Observable implements Model {
 	@Override
 	public void loadlevel(LevelLoader l,InputStream f) throws Exception
 	{
+
+		if(count>0)
+		{
+			lvl.removeallfields();
+		
+		}
 		l.loadLevel(f,lvl);//loading the level	
 		this.setChanged();
 		LinkedList<Object> params = new LinkedList<Object>();
 		params.add("display");
 		params.add(new Display2Dimention());
 		this.notifyObservers(params);
+		count++;
 	}
 
 	@Override

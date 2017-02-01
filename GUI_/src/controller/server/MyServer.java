@@ -1,9 +1,8 @@
 package controller.server;
 
-import java.io.BufferedReader;
+
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
@@ -47,18 +46,19 @@ public class MyServer {
 	
 	private void runServer()throws Exception {
 		this.server =new ServerSocket(port);
-		server.setSoTimeout(1000);
+		//server.setSoTimeout(1000);
 		while(!stop)
 		{
 			try{
+				
 				 Socket aClient=server.accept(); // blocking call
 				Thread t1 = new Thread(new Runnable()
 				 { //WOW! we should control the number of threads!
 					public void run()
 					{
 					  try {
-						
-						  	Thread t2=ch.aSyncReadInputsAndSend(new BufferedReader(new InputStreamReader(aClient.getInputStream())),new PrintWriter(aClient.getOutputStream()));
+						 System.out.println(aClient.getLocalPort());
+						  	Thread t2=ch.aSyncReadInputsAndSend(aClient.getInputStream(),aClient.getOutputStream());
 						  	t2.join();
 						  	aClient.getInputStream().close();
 						  	aClient.getOutputStream().close();

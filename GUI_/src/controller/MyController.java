@@ -17,6 +17,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import controller.server.ClientHandler;
 import controller.server.MyServer;
 import model.Model;
 import view.View;
@@ -69,10 +70,11 @@ public class MyController extends Controller {
 		    queue.add(c);
 		this.Start();		
 	}
-	public MyController(Model m, View v,MyServer server)
+	
+	public MyController(Model m, ClientHandler ch,MyServer server)
 	{
 		this.m = m;
-		this.v = v;	
+		this.v = (View) ch;	
 		this.queue = new LinkedBlockingQueue<Command>();
 		com_choise = new HashMap<String,Command>();
 		com_choise.put("display",new CommandDisplay());
@@ -81,6 +83,7 @@ public class MyController extends Controller {
 		com_choise.put("loadfile",new CommandLoadFileName());
 		com_choise.put("savefile",new CommandSaveFileName());
 		this.server=server;
+		server.Start();
 		this.Start();		
 	}
 	
@@ -91,7 +94,7 @@ public class MyController extends Controller {
 		@SuppressWarnings("unchecked")
 		LinkedList<Object> params = (LinkedList<Object>) arg;
 		String commandKey = params.removeFirst().toString();
-		
+		System.out.println(commandKey);
 		Command command = com_choise.get(commandKey);
 		
 		//if the command that the user inserted doesn't exist
@@ -107,12 +110,17 @@ public class MyController extends Controller {
 			params.addFirst(m);	
 		}		
 		
-		
+		else if(o instanceof ClientHandler)
+		{
+			
+			params.addFirst(m);
+		}
 		//if the notify come from the View we need to proceed to the Model
 		else if(o instanceof View)
 		{		
 			params.addFirst(m);
 		}
+		
 		
 		command.setParams(params);
 		this.queue.add(command);		//adding the command to the blocking queue	
